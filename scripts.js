@@ -1,13 +1,33 @@
 const convertButton = document.querySelector(".convert-button");
+const currencySelect = document.querySelector(".currency-select");
 
-function convertValues(){
-    const inputCurrencyValue = document.querySelector(".input-currency").value
+function convertValues() {
+  const inputCurrencyValue = document.querySelector(".input-currency").value;
+  const currencyValueToConvert = document.querySelector("#currency-to-convert"); //Valor em Real
+  const currencyValueConverted = document.querySelector("#currency-converted"); //Outras moedas
 
-    const dolarToday = 5.2;
+  console.log(currencySelect.value);
+  const dolarToday = 5.2;
+  const euroToday = 6.2;
 
-    const convertedValue = inputCurrencyValue / dolarToday
+  if (currencySelect.value == "dolar") {
+    currencyValueConverted.innerHTML = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+    }).format(inputCurrencyValue / dolarToday);
+  }
 
-    console.log(convertedValue)
+  if (currencySelect.value == "euro") {
+    currencyValueConverted.innerHTML = new Intl.NumberFormat("de-DE", {
+      style: "currency",
+      currency: "EUR",
+    }).format(inputCurrencyValue / euroToday);
+  }
+
+  currencyValueToConvert.innerHTML = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(inputCurrencyValue);
 }
 
-convertButton.addEventListener("click",convertValues)
+convertButton.addEventListener("click", convertValues);
